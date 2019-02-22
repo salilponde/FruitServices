@@ -1,0 +1,16 @@
+{
+  "ReRoutes": [
+    {
+      "UpstreamPathTemplate": "/apple/{url}",
+      "UpstreamHttpMethod": [ "Get", "Put", "Post", "Delete", "Patch" ],
+      "DownstreamPathTemplate": "/{url}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5100
+        }
+      ]
+    }
+  ]
+}
