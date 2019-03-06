@@ -26,7 +26,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{2CA595D2-D551-46E4-BF81-5121EF7B937B}"
 	ProjectSection(SolutionItems) = preProject
 		build.sh = build.sh
+		Dockerfile.Apple = Dockerfile.Apple
 		Dockerfile.Gateway = Dockerfile.Gateway
+		Dockerfile.Mango = Dockerfile.Mango
 		README.md = README.md
 	EndProjectSection
 EndProject

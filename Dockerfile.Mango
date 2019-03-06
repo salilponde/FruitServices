@@ -1,0 +1,21 @@
+FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
+WORKDIR /app
+EXPOSE 5101
+
+FROM microsoft/dotnet:2.2-sdk AS build
+WORKDIR /src
+COPY ["Fruits.Mango.Process/Fruits.Mango.Process.csproj", "Fruits.Mango.Process/"]
+RUN dotnet restore "Fruits.Mango.Process/Fruits.Mango.Process.csproj"
+COPY . .
+WORKDIR "/src/Fruits.Mango.Process"
+RUN dotnet build "Fruits.Mango.Process.csproj" -c Release -o /app
+
+FROM build AS publish
+RUN dotnet publish "Fruits.Mango.Process.csproj" -c Release -o /app
+
+FROM base AS final
+WORKDIR /app
+
+COPY --from=publish /app .
+
+ENTRYPOINT ["dotnet", "Fruits.Mango.Process.dll"]
