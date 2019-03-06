@@ -4,18 +4,18 @@ EXPOSE 5100
 
 FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
-COPY ["Fruits.Apple.Process/Fruits.Apple.Process.csproj", "Fruits.Apple.Process/"]
-RUN dotnet restore "Fruits.Apple.Process/Fruits.Apple.Process.csproj"
+COPY ["Fruits.Apple.Api/Fruits.Apple.Api.csproj", "Fruits.Apple.Api/"]
+RUN dotnet restore "Fruits.Apple.Api/Fruits.Apple.Api.csproj"
 COPY . .
-WORKDIR "/src/Fruits.Apple.Process"
-RUN dotnet build "Fruits.Apple.Process.csproj" -c Release -o /app
+WORKDIR "/src/Fruits.Apple.Api"
+RUN dotnet build "Fruits.Apple.Api.csproj" -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish "Fruits.Apple.Process.csproj" -c Release -o /app
+RUN dotnet publish "Fruits.Apple.Api.csproj" -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
 
 COPY --from=publish /app .
 
-ENTRYPOINT ["dotnet", "Fruits.Apple.Process.dll"]
+ENTRYPOINT ["dotnet", "Fruits.Apple.Api.dll"]
