@@ -18,7 +18,7 @@ namespace Fruits.Mango.Api.Controllers
             _stockService = stockService;
         }
 
-        // All methods use GET so that we can easily call them from a web browser
+        // All methods use GET so that we can easily call them from a web browser.
 
         [HttpGet]
         public ActionResult<int> GetStock()
