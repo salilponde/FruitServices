@@ -4,18 +4,18 @@ EXPOSE 80
 
 FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
-COPY ["Worldline.Gateway.Process/Worldline.Gateway.Process.csproj", "Worldline.Gateway.Process/"]
-RUN dotnet restore "Worldline.Gateway.Process/Worldline.Gateway.Process.csproj"
+COPY ["Fruits.Gateway.Process/Fruits.Gateway.Process.csproj", "Fruits.Gateway.Process/"]
+RUN dotnet restore "Fruits.Gateway.Process/Fruits.Gateway.Process.csproj"
 COPY . .
-WORKDIR "/src/Worldline.Gateway.Process"
-RUN dotnet build "Worldline.Gateway.Process.csproj" -c Release -o /app
+WORKDIR "/src/Fruits.Gateway.Process"
+RUN dotnet build "Fruits.Gateway.Process.csproj" -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish "Worldline.Gateway.Process.csproj" -c Release -o /app
+RUN dotnet publish "Fruits.Gateway.Process.csproj" -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
 
 COPY --from=publish /app .
 
-ENTRYPOINT ["dotnet", "Worldline.Gateway.Process.dll"]
+ENTRYPOINT ["dotnet", "Fruits.Gateway.Process.dll"]
