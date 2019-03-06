@@ -11,15 +11,16 @@ changed_services=()
 for folder in $changed_folders
 do
   if [ "$folder" == 'Common' ]; then
-    echo "Common folder changed, building all microservices"
+    echo "Common folder changed, will build all microservices"
     changed_services=`find . -maxdepth 1 -type d -not -name 'Common' -not -name '.vs' -not -name '.git' -not -path '.' | sed 's|./||'`
-    echo "List of microservices: "$changed_services
     break
   else
     echo "Adding $folder to list of microservices to build"
     changed_services+=("$folder")
   fi
 done
+
+echo "List of microservices to build: "$changed_services
 
 for service in $changed_services
 do
